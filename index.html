@@ -1,1 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aakash N | Artificial Intelligence &amp; Data Science</title>
+<meta name="description" content="Portfolio of Aakash N, B.Tech AI &amp; Data Science student: projects, certificates, research and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1b2430; --muted:#5a6572; --line:#d3d9e0; --accent:#0d6b8a; --on:#fff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#10161d; --card:#18212b; --ink:#e8edf2; --muted:#9aa7b4; --line:#2a3542; --accent:#4cc2e4; --on:#08222b; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
 
+  /* top bar */
+  .bar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .in-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 56px; }
+  .logo { font-weight: 600; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  nav { display: flex; gap: 18px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+  nav a { position: relative; color: var(--ink); text-decoration: none; font-size: .95rem; }
+  nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+  nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+
+  /* sections */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.7rem; margin: 0 0 20px; font-weight: 600; letter-spacing: -.01em; }
+  h3 { font-size: 1.05rem; margin: 0; font-weight: 600; }
+  .meta { color: var(--muted); font-size: .93rem; margin: 2px 0 6px; }
+  .entry { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .entry p { margin: 6px 0 0; max-width: 68ch; }
+  .tags span { display: inline-block; border: 1px solid var(--line); border-radius: 6px; padding: 2px 10px; margin: 0 6px 6px 0; font-size: .92rem; background: var(--card); }
+  .group { margin: 0 0 18px; }
+  .group h3 { margin-bottom: 8px; }
+
+  /* hero */
+  .hero { padding: 64px 0 56px; border-top: 0; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 230px; gap: 40px; align-items: center; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 99px; padding: 3px 12px; font-size: .9rem; color: var(--muted); margin-bottom: 16px; }
+  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2fa66a; animation: pulse 1.8s infinite; }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; font-weight: 600; }
+  .role { font-size: 1.25rem; font-weight: 500; color: var(--accent); min-height: 1.9rem; margin: 0 0 12px; }
+  .hero p { max-width: 56ch; color: var(--muted); font-size: 1.05rem; margin: 0 0 22px; }
+  .avatar { position: relative; width: 220px; height: 220px; border-radius: 50%; border: 2px solid var(--accent); display: grid; place-items: center; font-size: 3rem; font-weight: 600; color: var(--accent); overflow: hidden; justify-self: center; }
+  .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .btn { display: inline-block; padding: 10px 18px; border-radius: 6px; background: var(--accent); color: var(--on); text-decoration: none; font-weight: 500; margin: 0 10px 10px 0; transition: transform .2s ease, box-shadow .2s ease; }
+  .btn.alt { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(13,107,138,.28); }
+
+  /* about */
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0 0; }
+  .glance dt { color: var(--muted); font-size: .88rem; }
+  .glance dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+
+  /* certificates */
+  .chip { font: inherit; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 99px; padding: 4px 14px; cursor: pointer; margin: 0 8px 8px 0; }
+  .chip[aria-pressed="true"] { background: var(--accent); color: var(--on); border-color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; margin-top: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; animation: pop .35s ease both; transition: transform .2s ease, border-color .2s ease; }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .card .meta { margin: 4px 0 12px; }
+  .card a { margin-top: auto; }
+  .more { margin-top: 24px; }
+  .more ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+
+  /* assistant */
+  .chat { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 18px; max-width: 640px; }
+  #answer { min-height: 3.4em; margin: 0 0 14px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 44px; color: var(--muted); font-size: .92rem; }
+  footer a { margin-left: 14px; }
+
+  /* animations */
+  .progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; z-index: 10; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes pop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+  @keyframes pulse { 50% { opacity: .3; } }
+  @keyframes blink { 50% { opacity: 0; } }
+  .rise > *, .avatar { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .rise > :nth-child(2) { animation-delay: .1s; }
+  .rise > :nth-child(3) { animation-delay: .25s; }
+  .rise > :nth-child(4) { animation-delay: .4s; }
+  .rise > :nth-child(5) { animation-delay: .55s; }
+  .avatar { animation-delay: .3s; }
+  .caret::after { content: ""; display: inline-block; width: 2px; height: 1.1em; margin-left: 3px; background: var(--accent); vertical-align: -.15em; animation: blink 1s steps(2) infinite; }
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 640px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .avatar { width: 150px; height: 150px; font-size: 2.2rem; order: -1; justify-self: start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js .reveal { opacity: 1; transform: none; }
+  }
+</style>
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="bar">
+  <div class="wrap in-bar">
+    <a class="logo" href="#home">Aakash N.</a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#research">Research</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section id="home" class="hero">
+  <div class="wrap hero-grid">
+    <div class="rise">
+      <span class="badge">Open to opportunities</span>
+      <h1>Aakash N turns data into decisions.</h1>
+      <div class="role" aria-label="Aspiring Data Analyst and Data Scientist"><span id="typed"></span></div>
+      <p>B.Tech student in Artificial Intelligence and Data Science. I use Python, SQL, Excel and Power BI to find insights and build machine learning projects.</p>
+      <div>
+        <a class="btn" href="#projects">View projects</a>
+        <a class="btn alt" href="#certificates">View certificates</a>
+        <a class="btn alt" href="#contact">Contact me</a>
+        <a class="btn alt" href="resume/Aakash_N_Resume-1.pdf" download>Download resume</a>
+      </div>
+    </div>
+    <!-- Put your photo at assets/profile.png. Until then, the initials show. -->
+    <div class="avatar" aria-hidden="true">AN<img src="assets/profile.png" alt="" onerror="this.remove()"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about"><div class="wrap">
+  <h2>About</h2>
+  <p style="max-width:68ch">I'm a B.Tech Artificial Intelligence and Data Science student at AKT Memorial College of Engineering and Technology, based in Ulundurpet, Tamil Nadu. I enjoy cleaning data, finding patterns in it and turning the results into dashboards and models people can use. I'm looking for an entry-level Data Analyst or Data Science role.</p>
+  <div class="tags" style="margin-top:16px">
+    <span>Quick learner</span><span>Problem solving</span><span>Teamwork</span><span>Leadership</span><span>Adaptability</span><span>Communication</span>
+  </div>
+  <dl class="glance">
+    <div><dt>Based in</dt><dd>Ulundurpet, Tamil Nadu</dd></div>
+    <div><dt>Studying</dt><dd>AI &amp; Data Science</dd></div>
+    <div><dt>Graduating</dt><dd>2027</dd></div>
+    <div><dt>CGPA</dt><dd>8 / 10</dd></div>
+    <div><dt>Email</dt><dd>aakashebiofficial@gmail.com</dd></div>
+  </dl>
+</div></section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education"><div class="wrap">
+  <h2>Education</h2>
+  <div class="entry">
+    <h3>B.Tech, Artificial Intelligence and Data Science</h3>
+    <p class="meta">AKT Memorial College of Engineering and Technology, Anna University · 2023 to 2027 (pursuing)</p>
+    <p>CGPA 8 / 10</p>
+  </div>
+  <div class="entry">
+    <h3>Higher Secondary (Class XII), Computer Science</h3>
+    <p class="meta">St. Paul Matriculation Higher Secondary School · 2022 to 2023</p>
+    <p>68.17%</p>
+  </div>
+  <div class="entry">
+    <h3>Class X</h3>
+    <p class="meta">Beschi Higher Secondary School, Ulundurpet · 2020 to 2021</p>
+  </div>
+</div></section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills"><div class="wrap">
+  <h2>Skills</h2>
+  <div class="group"><h3>Programming and databases</h3><div class="tags"><span>Python (basics)</span><span>Java (basic)</span><span>SQL</span><span>MySQL</span></div></div>
+  <div class="group"><h3>Data analysis and visualization</h3><div class="tags"><span>Excel</span><span>Power BI</span><span>Tableau (learning)</span><span>Advanced Excel (learning)</span></div></div>
+  <div class="group"><h3>Machine learning</h3><div class="tags"><span>Data preprocessing</span><span>Feature selection</span><span>Classification</span></div></div>
+  <div class="group"><h3>Web</h3><div class="tags"><span>HTML5</span><span>CSS3</span></div></div>
+  <div class="group"><h3>Tools</h3><div class="tags"><span>Git</span><span>GitHub</span><span>VS Code</span><span>Jupyter Notebook</span><span>MATLAB</span><span>MS Office</span></div></div>
+  <div class="group"><h3>Concepts</h3><div class="tags"><span>OOPs basics</span><span>Data structures</span><span>Problem solving</span></div></div>
+</div></section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience"><div class="wrap">
+  <h2>Experience</h2>
+  <div class="entry">
+    <h3>Web Development Intern</h3>
+    <p class="meta">InternCourse · 04 December 2025 to 04 January 2026</p>
+    <p>One-month internship covering web development concepts and workflows.</p>
+    <p><a href="certificates/Intern_course.pdf" target="_blank" rel="noopener">View certificate</a></p>
+  </div>
+  <div class="entry">
+    <h3>Nimirnthu Nil Hackathon, EDII-TN</h3>
+    <p class="meta">Team project: Newborn Baby Monitoring and Hospital Visit Management System</p>
+    <p>Cleared three rounds of shortlisting. We built an AI-powered healthcare platform with parent and doctor portals, appointment booking, queue tracking, health reports, reminders and voice assistance.</p>
+  </div>
+</div></section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects"><div class="wrap">
+  <h2>Projects</h2>
+  <div class="entry">
+    <h3>AI-Powered Disease Prediction Based on Patient Data</h3>
+    <p>A machine learning model that predicts diseases from patient health data. I applied data preprocessing and feature selection, used classification algorithms for early and reliable prediction, and designed the system architecture.</p>
+    <div class="tags" style="margin-top:10px"><span>Python</span><span>Machine Learning</span><span>Classification</span></div>
+    <p><a href="https://github.com/Aakash-3468" target="_blank" rel="noopener">View on GitHub</a></p>
+  </div>
+  <div class="entry">
+    <h3>Intelligent Cloud Resource Monitoring and Cost Optimization Platform</h3>
+    <p class="meta">Ongoing</p>
+    <p>A platform that monitors cloud resource usage and performance to find cost-saving opportunities across cloud infrastructure.</p>
+    <div class="tags" style="margin-top:10px"><span>Python</span><span>Cloud Computing</span><span>Data Analysis</span></div>
+  </div>
+</div></section>
+
+<!-- ============ CERTIFICATES ============ -->
+<section id="certificates"><div class="wrap">
+  <h2>Certificates</h2>
+  <div id="filters">
+    <button class="chip" data-f="all" aria-pressed="true">All</button>
+    <button class="chip" data-f="data" aria-pressed="false">Data and BI</button>
+    <button class="chip" data-f="ai" aria-pressed="false">AI, cloud and security</button>
+    <button class="chip" data-f="program" aria-pressed="false">Internship and programs</button>
+  </div>
+  <div class="grid" id="certGrid"></div>
+  <div class="more">
+    <h3>Also completed</h3>
+    <ul>
+      <li>Advanced Java Programming, AKT Memorial College with VEI Technologies (Feb 2026)</li>
+      <li>Build and Deploy Your Own AI Model workshop, Atal Incubation Centre, PEC Foundation (Feb 2026)</li>
+      <li>HDCA Programming Certification; Python, HTML, CSS and MySQL certifications</li>
+      <li>NPTEL Cloud Computing (in progress)</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- ============ RESEARCH ============ -->
+<section id="research"><div class="wrap">
+  <h2>Research</h2>
+  <!-- To add a paper PDF, add: <p><a href="assets/paper.pdf" target="_blank" rel="noopener">View paper</a></p> -->
+  <div class="entry"><h3>NCARMS 2026 Conference</h3><p class="meta">Presented a paper</p></div>
+  <div class="entry"><h3>ICETABICT'26 International Conference</h3><p class="meta">Presented a paper</p></div>
+</div></section>
+
+<!-- ============ ASK ============ -->
+<section id="ask"><div class="wrap">
+  <h2>Ask about Aakash</h2>
+  <div class="chat">
+    <p id="answer">Pick a topic to get a quick answer. These are ready-made answers, not a live AI.</p>
+    <button class="chip">Skills</button><button class="chip">Education</button><button class="chip">Projects</button><button class="chip">Internship</button><button class="chip">Certificates</button><button class="chip">Contact</button>
+  </div>
+</div></section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact"><div class="wrap">
+  <h2>Contact</h2>
+  <p style="max-width:60ch">I'm open to entry-level Data Analyst and Data Science roles. The quickest way to reach me is email.</p>
+  <a class="btn" href="mailto:aakashebiofficial@gmail.com">Send an email</a>
+  <a class="btn alt" href="https://github.com/Aakash-3468" target="_blank" rel="noopener">GitHub</a>
+  <a class="btn alt" href="https://www.linkedin.com/in/aakash-n-1730323a5" target="_blank" rel="noopener">LinkedIn</a>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  © 2026 Aakash N. Built with HTML, CSS and JavaScript.
+  <a href="https://github.com/Aakash-3468" target="_blank" rel="noopener">GitHub</a>
+  <a href="https://www.linkedin.com/in/aakash-n-1730323a5" target="_blank" rel="noopener">LinkedIn</a>
+  <a href="#home">Back to top</a>
+</div></footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Certificates: title, issuer, date, file, category. Copy a line to add a new certificate.
+  var certs = [
+    ["Data Science", "Infosys Springboard", "Jan 2026", "Infosis.jpg", "data"],
+    ["Data Science & Analytics", "HP LIFE", "Jan 2026", "HP_life.pdf", "data"],
+    ["Data Analytics webinar", "Brand Monk Academy (NSDC)", "Dec 2025", "Brandmonk.pdf", "data"],
+    ["Power BI Micro Course", "Skill Course", "Jan 2026", "Skill_course.jpg", "data"],
+    ["Power BI Workshop", "OfficeMaster", "Jan 2026", "Office_master.pdf", "data"],
+    ["Data Analytics using Power BI Workshop", "TechTip24", "Oct 2024", "Tech_Tip.jpg", "data"],
+    ["OCI 2025 Certified AI Foundations Associate", "Oracle University", "May 2025", "Oracle.pdf", "ai"],
+    ["Generative AI Mastermind", "Outskill x Moneycontrol", "", "Outskill.pdf", "ai"],
+    ["GenAI Assurance workshop", "UPZY PencilBitz", "Dec 2025", "UPZY.jpg", "ai"],
+    ["AI/ML webinar", "LeSuccess Technical Learning Centre", "Jan 2026", "Lesuccess.pdf", "ai"],
+    ["Introduction to AWS", "DataFlair", "Dec 2025", "Data_flair.pdf", "ai"],
+    ["Introduction to Cybersecurity", "Cisco Networking Academy", "Jul 2025", "Cisco.pdf", "ai"],
+    ["Web Development Internship", "InternCourse", "Dec 2025 to Jan 2026", "Intern_course.pdf", "program"],
+    ["EBPL, Naan Mudhalvan Scheme", "Tamil Nadu Skill Development Corporation", "Oct 2025", "NM.pdf", "program"]
+  ];
+  var grid = document.getElementById("certGrid");
+  var chips = document.querySelectorAll("#filters .chip");
+  function draw(f) {
+    grid.innerHTML = certs.filter(function (c) { return f === "all" || c[4] === f; }).map(function (c) {
+      return '<article class="card"><h3>' + c[0].replace(/&/g, "&amp;") + '</h3><p class="meta">' + c[1] + (c[2] ? " · " + c[2] : "") +
+        '</p><a href="certificates/' + c[3] + '" target="_blank" rel="noopener">View certificate</a></article>';
+    }).join("");
+  }
+  chips.forEach(function (b) {
+    b.addEventListener("click", function () {
+      chips.forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+      draw(b.dataset.f);
+    });
+  });
+  draw("all");
+
+  // Ask about Aakash (ready-made answers)
+  var A = {
+    Skills: "Python (basics), Java (basic), SQL and MySQL, Excel, Power BI, HTML and CSS. Currently learning Tableau and Advanced Excel.",
+    Education: "B.Tech in Artificial Intelligence and Data Science at AKT Memorial College of Engineering and Technology (Anna University), 2023 to 2027, CGPA 8 / 10.",
+    Projects: "An AI-powered disease prediction model built on patient data, and an ongoing cloud resource monitoring and cost optimization platform.",
+    Internship: "Web Development intern at InternCourse, December 2025 to January 2026.",
+    Certificates: "14 certificates from Infosys Springboard, HP LIFE, Oracle, Cisco, DataFlair and more. See the Certificates section above.",
+    Contact: "Email aakashebiofficial@gmail.com or message Aakash on LinkedIn."
+  };
+  document.querySelectorAll(".chat .chip").forEach(function (b) {
+    b.addEventListener("click", function () { document.getElementById("answer").textContent = A[b.textContent]; });
+  });
+
+  // Typing effect (change the words here)
+  var el = document.getElementById("typed");
+  var words = ["Aspiring Data Analyst", "Aspiring Data Scientist", "Power BI and Python learner"];
+  if (reduce) {
+    el.textContent = words[0];
+  } else {
+    var w = 0, c = 0, del = false;
+    el.classList.add("caret");
+    (function tick() {
+      var word = words[w];
+      c += del ? -1 : 1;
+      el.textContent = word.slice(0, c);
+      var wait = del ? 40 : 80;
+      if (!del && c === word.length) { del = true; wait = 1400; }
+      else if (del && c === 0) { del = false; w = (w + 1) % words.length; wait = 400; }
+      setTimeout(tick, wait);
+    })();
+  }
+
+  // Reveal on scroll
+  var items = document.querySelectorAll("section:not(.hero) h2, .entry, .glance, .group, .more, .chat");
+  items.forEach(function (n) { n.classList.add("reveal"); });
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    items.forEach(function (n) { io.observe(n); });
+  } else {
+    items.forEach(function (n) { n.classList.add("in"); });
+  }
+
+  // Scroll progress bar
+  var bar = document.getElementById("progress");
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = "scaleX(" + (h > 0 ? window.scrollY / h : 0) + ")";
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
